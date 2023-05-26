@@ -7,4 +7,4 @@ RUN stack --version
 COPY . ./
 RUN stack build
 
-CMD ["stack", "run", "scotty-api-exe"]
+# CMD ["stack", "run", "scotty-api-exe"]

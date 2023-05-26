@@ -21,7 +21,10 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- text
+- aeson
 - scotty >= 0.12
+- http-types >= 0.12.3
 
 ghc-options:
 - -Wall
