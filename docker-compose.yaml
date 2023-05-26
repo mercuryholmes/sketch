@@ -1,0 +1,46 @@
+version: '3'
+services:
+  svelte:
+    build: ./svelte
+    container_name: svelte
+    tty: true
+    ports:
+      - 5173:5173
+    environment:
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./svelte:/data/repo
+  haskell:
+    build: ./haskell
+    container_name: haskell
+    tty: true
+    ports:
+      - 8080:8080
+    environment:
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./haskell:/data/repo   
+  # elixir:
+  #   build: ./elixir
+  #   container_name: elixir
+  #   tty: true
+  #   ports:
+  #     - 4000:4000
+  #   environment:
+  #     TZ: 'Asia/Tokyo'
+  #   volumes:
+  #     - ./elixir:/data/repo   
+  # postgres:
+  #   image: postgres:14
+  #   container_name: postgres
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     # POSTGRES_DB: atelier
+  #     POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+  #     TZ: "Asia/Tokyo"
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     - ./data:/var/lib/postgresql/data
