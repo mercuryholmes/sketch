@@ -25,11 +25,18 @@ source-repository head
 
 library
   exposed-modules:
+      Cat.Model
+      Cat.Types
+      Common.Types
+      Config
       Lib
   other-modules:
       Paths_scotty_api
   hs-source-dirs:
       src
+  default-extensions:
+      OverloadedStrings
+      DeriveGeneric
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       aeson
@@ -46,6 +53,9 @@ executable scotty-api-exe
       Paths_scotty_api
   hs-source-dirs:
       app
+  default-extensions:
+      OverloadedStrings
+      DeriveGeneric
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aeson
@@ -64,6 +74,9 @@ test-suite scotty-api-test
       Paths_scotty_api
   hs-source-dirs:
       test
+  default-extensions:
+      OverloadedStrings
+      DeriveGeneric
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
   build-depends:
       aeson
