@@ -1,12 +1,23 @@
-module Cat.Model (getCats) where
+module Cat.Model (getCats, getCatById, insertCat) where
 
 import Cat.Types
 import qualified Config as Config
 import Database.PostgreSQL.Simple
+import Data.Text
 
 getCats :: IO [Cat]
 getCats = do
   result <- queryExec "SELECT * FROM cats" :: IO [Cat]
+  return result
+
+getCatById :: Int -> IO [Cat]
+getCatById _id = do
+  result <- queryExecParam "SELECT * FROM cats WHERE id = ?" (Only _id) :: IO [Cat]
+  return result
+
+insertCat :: Text -> Maybe Text -> Maybe Text -> IO [Cat]
+insertCat name breed description = do
+  result <- queryExecParam "INSERT INTO cats (name, breed, description) VALUES (?, ?, ?) RETURNING *" (name, breed, description) :: IO [Cat]
   return result
 
 queryExec :: FromRow a => Query -> IO [a]
@@ -22,3 +33,10 @@ queryExecParam queryString q = do
   result <- query conn queryString q
   close conn
   return result
+
+-- executeWithResult :: ToRow q => Query -> q -> IO Int64
+-- executeWithResult queryString q = do
+--   conn <- connect Config.database
+--   result <- execute conn queryString q
+--   close conn
+--   return result
