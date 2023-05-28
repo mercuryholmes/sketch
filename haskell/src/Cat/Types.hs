@@ -1,9 +1,13 @@
-module Cat.Types (Cat(..), CreateCat(..), UpdateCat(..)) where
+module Cat.Types (Cat(..), CreateCat(..), UpdateCat(..), CatError(..)) where
 
 import Data.Aeson
 import Database.PostgreSQL.Simple.FromRow
 import Data.Text
 import GHC.Generics (Generic)
+
+data CatError
+  = CatErrorNotFound
+  deriving (Eq, Show)
 
 data Cat = Cat
   {

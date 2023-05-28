@@ -1,4 +1,4 @@
-module Cat.Model (getCats, getCatById, insertCat, updateCat, deleteCat) where
+module Cat.Model (getCats, getCatById, insertCat, updateCat, deleteCat, catExists) where
 
 import Cat.Types
 import qualified Config as Config
@@ -30,6 +30,11 @@ deleteCat :: Int -> IO Int64
 deleteCat _id = do
   result <- executeQuery "DELETE FROM cats WHERE id = ?" (Only _id)
   return result
+
+catExists :: Int -> IO Bool
+catExists _id = do
+  [Only cat] <- queryExecParam "SELECT COUNT(*) FROM cats WHERE id = ?" (Only _id) :: IO [Only Int]
+  return $ cat > 0
 
 queryExec :: FromRow a => Query -> IO [a]
 queryExec queryString = do
