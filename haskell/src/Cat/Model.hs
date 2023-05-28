@@ -1,9 +1,10 @@
-module Cat.Model (getCats, getCatById, insertCat) where
+module Cat.Model (getCats, getCatById, insertCat, updateCat, deleteCat) where
 
 import Cat.Types
 import qualified Config as Config
 import Database.PostgreSQL.Simple
 import Data.Text
+import Data.Int (Int64)
 
 getCats :: IO [Cat]
 getCats = do
@@ -20,6 +21,16 @@ insertCat name breed description = do
   result <- queryExecParam "INSERT INTO cats (name, breed, description) VALUES (?, ?, ?) RETURNING *" (name, breed, description) :: IO [Cat]
   return result
 
+updateCat :: Int -> Text -> Maybe Text -> Maybe Text -> IO [Cat]
+updateCat _id name breed description = do
+  result <- queryExecParam "UPDATE cats SET name = ?, breed = ?, description = ? WHERE id = ? RETURNING *" (name, breed, description, _id) :: IO [Cat]
+  return result
+
+deleteCat :: Int -> IO Int64
+deleteCat _id = do
+  result <- executeQuery "DELETE FROM cats WHERE id = ?" (Only _id)
+  return result
+
 queryExec :: FromRow a => Query -> IO [a]
 queryExec queryString = do
   conn <- connect Config.database
@@ -34,9 +45,9 @@ queryExecParam queryString q = do
   close conn
   return result
 
--- executeWithResult :: ToRow q => Query -> q -> IO Int64
--- executeWithResult queryString q = do
---   conn <- connect Config.database
---   result <- execute conn queryString q
---   close conn
---   return result
+executeQuery :: ToRow q => Query -> q -> IO Int64
+executeQuery queryString q = do
+  conn <- connect Config.database
+  result <- execute conn queryString q
+  close conn
+  return result

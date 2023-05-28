@@ -1,4 +1,4 @@
-module Cat.Types (Cat(..), CreateCat(..)) where
+module Cat.Types (Cat(..), CreateCat(..), UpdateCat(..)) where
 
 import Data.Aeson
 import Database.PostgreSQL.Simple.FromRow
@@ -32,6 +32,20 @@ data CreateCat = CreateCat
 
 instance FromJSON CreateCat where
   parseJSON (Object v) = CreateCat
+    <$> (v .: "name")
+    <*> (v .:? "breed")
+    <*> (v .:? "description")
+  parseJSON _ = fail "invalid json"
+
+data UpdateCat = UpdateCat
+  {
+    updateCatName  :: Text,
+    updateCatBreed :: Maybe Text,
+    updateCatDescription :: Maybe Text
+  } deriving (Generic, Show)
+
+instance FromJSON UpdateCat where
+  parseJSON (Object v) = UpdateCat
     <$> (v .: "name")
     <*> (v .:? "breed")
     <*> (v .:? "description")

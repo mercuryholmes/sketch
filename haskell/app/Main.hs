@@ -41,6 +41,24 @@ routes = do
         status status201
         json $ head cat
 
+  put "/api/cat/:id" $ do
+    _id <- param "id"
+    (UpdateCat _name _breed _description) <- jsonData
+    cat <- (liftIO $ updateCat _id _name _breed _description)
+    case cat of
+      [] -> do
+        status status400
+        json $ Aeson.object ["message" .= ("failed to update" :: String)]
+      _ -> do
+        status status200
+        json $ head cat
+
+  delete "/api/cat/:id" $ do
+    _id <- param "id"
+    _ <- liftIO $ deleteCat _id
+    status status200
+    json $ Aeson.object ["message" .= ("success delete" :: String)] 
+
   notFound $ do
     status status404
     json $ Aeson.object ["message" .= ("API URI not found." :: String)]
