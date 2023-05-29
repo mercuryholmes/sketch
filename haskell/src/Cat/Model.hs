@@ -1,4 +1,4 @@
-module Cat.Model (getCats, getCatById, insertCat, updateCat, deleteCat, catExists) where
+module Cat.Model (module Cat.Model) where
 
 import Cat.Types
 import qualified Config as Config
@@ -26,15 +26,20 @@ updateCat _id name breed description = do
   result <- queryExecParam "UPDATE cats SET name = ?, breed = ?, description = ? WHERE id = ? RETURNING *" (name, breed, description, _id) :: IO [Cat]
   return result
 
-deleteCat :: Int -> IO Int64
+deleteCat :: Int -> IO ()
 deleteCat _id = do
-  result <- executeQuery "DELETE FROM cats WHERE id = ?" (Only _id)
-  return result
+  _ <- executeQuery "DELETE FROM cats WHERE id = ?" (Only _id)
+  return ()
 
 catExists :: Int -> IO Bool
 catExists _id = do
   [Only cat] <- queryExecParam "SELECT COUNT(*) FROM cats WHERE id = ?" (Only _id) :: IO [Only Int]
   return $ cat > 0
+
+getCatByName :: Text -> IO [Cat]
+getCatByName name = do
+  result <- queryExecParam "SELECT * FROM cats WHERE name = ?" (Only name) :: IO [Cat]
+  return result
 
 queryExec :: FromRow a => Query -> IO [a]
 queryExec queryString = do

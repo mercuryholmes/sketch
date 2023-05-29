@@ -7,6 +7,7 @@ import GHC.Generics (Generic)
 
 data CatError
   = CatErrorNotFound
+  | CatErrorNameDuplicate
   deriving (Eq, Show)
 
 data Cat = Cat
