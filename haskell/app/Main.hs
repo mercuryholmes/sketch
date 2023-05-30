@@ -7,6 +7,7 @@ import qualified Data.Aeson as Aeson
 import Data.Aeson ((.=))
 import Control.Monad.IO.Class
 import Control.Monad.Except
+import Common.HTTP
 import Cat.Model
 import Cat.Types
 
@@ -33,7 +34,7 @@ routes = do
         json $ head cat
 
   post "/api/cat" $ do
-    (CreateCat _name _breed _description) <- jsonData
+    (CreateCat _name _breed _description) <- jsonData `rescue` parseJSONErrorHandler
     result <- liftIO $ runExceptT $ checkNewCatByName _name
     case result of
       Left err -> do
@@ -45,7 +46,7 @@ routes = do
 
   put "/api/cat/:id" $ do
     _id <- param "id"
-    (UpdateCat _name _breed _description) <- jsonData
+    (UpdateCat _name _breed _description) <- jsonData `rescue` parseJSONErrorHandler
     result <- liftIO $ runExceptT $ do
       (validateCatExists _id)
       (checkExistingCatByName _id _name)
@@ -99,5 +100,3 @@ checkExistingCatByName _id _name = do
   case result of
     [] -> return ()
     _  -> throwError CatErrorNameDuplicate
-  
-
