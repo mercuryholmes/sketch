@@ -27,6 +27,7 @@ library
   exposed-modules:
       Cat.Model
       Cat.Types
+      Common.HTTP
       Common.Types
       Config
       Lib

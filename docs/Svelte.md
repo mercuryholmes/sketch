@@ -1,6 +1,6 @@
 
 
-## Svelte　初期構築でやったことメモ
+## Svelte　初期構築メモ
 
 * コンテナに入る
 
@@ -11,8 +11,10 @@ docker exec -it svelte sh
 * カレントディレクトリにプロジェクトの作成
 
 ```bash
-npm create vite@latest ./ -- --tmplate svelte
+npm create vite@latest ./
 ```
+
+* 「SvelteKit」 > 「Skeleton project」 > 「Yes, using TypeScript syntax」 > ESLint, Prettier
 
 * 警告が出た場合は、npmをバージョンアップ
 
@@ -35,3 +37,6 @@ npm install
 ```bash
 npm run dev
 ```
+
+* ブラウザでアクセス
+http://localhost:5173/
