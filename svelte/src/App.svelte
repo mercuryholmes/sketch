@@ -7,21 +7,28 @@
 
 <Tailwindcss />
 <main>
-  <h1 class="text-3xl font-bold underline">Vite + Svelte</h1>
-  
-  <p>svelte-spa-router sample</p>
-  <p>Basic routing</p>
-  
-  <ul>
-      <li><a href="#/">Home</a></li>
-      <li><a href="#/about">About</a></li>
-  </ul>
-  
-  <Router {routes} />
+  <h1 class="text-3xl font-bold">Sketch</h1>
 
   <div class="card">
     <Counter />
   </div>
+
+  <p>svelte-spa-router sample</p>
+
+  <ul>
+      <li class="inline-block">
+        <a href="#/">Home</a>
+      </li>
+      <li class="inline-block">
+        <a href="#/about">About</a>
+      </li>
+      <li class="inline-block">
+        <a href="#/cat">Cat</a>
+      </li>
+  </ul>
+
+  <Router {routes} />
+
 </main>
 
 <style lang="postcss">
