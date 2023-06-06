@@ -47,6 +47,7 @@ library
     , postgresql-simple >=0.6.4
     , scotty >=0.12
     , text
+    , wai-cors
   default-language: Haskell2010
 
 executable scotty-api-exe
@@ -68,6 +69,7 @@ executable scotty-api-exe
     , scotty >=0.12
     , scotty-api
     , text
+    , wai-cors
   default-language: Haskell2010
 
 test-suite scotty-api-test
@@ -90,4 +92,5 @@ test-suite scotty-api-test
     , scotty >=0.12
     , scotty-api
     , text
+    , wai-cors
   default-language: Haskell2010

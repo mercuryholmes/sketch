@@ -2,6 +2,7 @@ module Main (main) where
 
 import Web.Scotty
 import Network.HTTP.Types.Status
+import Network.Wai.Middleware.Cors
 import qualified Data.Text as T
 import qualified Data.Aeson as Aeson
 import Data.Aeson ((.=))
@@ -14,8 +15,16 @@ import Cat.Types
 main :: IO ()
 main = scotty 8080 routes
 
+corsPolicy :: CorsResourcePolicy
+corsPolicy = simpleCorsResourcePolicy
+    { corsRequestHeaders = "Authorization":simpleHeaders
+    , corsMethods = "PUT":"DELETE":simpleMethods
+    }
+
 routes :: ScottyM ()
 routes = do
+  -- middlewares
+  middleware $ cors $ const $ Just corsPolicy
 
   get "/api/cat" $ do
     status status200
