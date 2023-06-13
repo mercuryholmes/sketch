@@ -13,8 +13,6 @@
     <Counter />
   </div>
 
-  <p>svelte-spa-router sample</p>
-
   <ul>
       <li class="inline-block">
         <a href="#/">Home</a>
