@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import EditModal from './EditModal.svelte';
+    import DeleteButton from './DeleteButton.svelte';
 
     let cats = [];
 
@@ -35,6 +36,7 @@
             <th>種類</th>
             <th>説明</th>
             <th></th>
+            <th></th>
         </tr>
    </thead>
    <tbody>
@@ -45,6 +47,7 @@
             <td>{cat.breed ?? ''}</td>
             <td>{cat.description ?? ''}</td>
             <td><EditModal on:fetchData={ fetchData } {...cat}/></td>
+            <td><DeleteButton on:fetchData={ fetchData } {...cat}/></td>
         </tr>
     {:else}
         <div>Loading...</div>
