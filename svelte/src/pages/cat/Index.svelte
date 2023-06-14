@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+    import AddModal from './AddModal.svelte';
 	import EditModal from './EditModal.svelte';
     import DeleteButton from './DeleteButton.svelte';
 
@@ -27,6 +28,8 @@
 </script>
 
 <h1>Cat page.</h1>
+
+<AddModal on:fetchData={ fetchData }/>
 
 <table class="table-fixed">
     <thead>

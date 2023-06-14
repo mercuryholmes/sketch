@@ -5,24 +5,19 @@
 	const dispatch = createEventDispatcher();
 	let showModal = false;
 
-	export let id;
-	export let name;
-	export let breed;
-	export let description;
-
 	let cat = {};
 	function initialize() {
 		cat = {
-			"name": name,
-			"breed": breed,
-			"description": description
+			"name": '',
+			"breed": '',
+			"description": ''
 		}
     };
 
-	const url = `http://localhost:8080/api/cat/${id}`;
+	const url = `http://localhost:8080/api/cat/`;
 	async function submit() {
         await fetch(url, {
-			method: 'PUT',
+			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({
 				"name": cat.name,
@@ -42,7 +37,7 @@
 </script>
 
 <button on:click={() => (showModal = true, initialize())}>
-    Edit
+    Add
 </button>
 
 <Modal bind:showModal>
