@@ -1,12 +1,15 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     import Modal from '../../lib/Modal.svelte';
+	import Message from '../../lib/Message.svelte';
 
 	const dispatch = createEventDispatcher();
 	let showModal = false;
-
+	let message;
 	let cat = {};
+
 	function initialize() {
+		message = '';
 		cat = {
 			"name": '',
 			"breed": '',
@@ -28,6 +31,7 @@
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
+			message = "Success create cat!";
 			dispatch('fetchData');
         })
         .catch((error) => {
@@ -41,6 +45,9 @@
 </button>
 
 <Modal bind:showModal>
+	<div slot="header">
+		<Message bind:message />
+	</div>
 	<form method="POST">
 		<label>
 			Name
