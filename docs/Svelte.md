@@ -11,17 +11,19 @@ docker exec -it svelte sh
 
 ```bash
 npm create vite@latest ./ -- --tmplate svelte
+# yarn create vite ./ --tmplate svelte
 ```
 
-* 「Svelte」 > 「JavaScript」
+* 「Svelte」 > 「TypeScript」
 
 * インストール
 
 ```bash
 npm install
+# yarn install
 ```
 
-* ホストからアクセスができるようvite.config.jsに追記
+* ホストからアクセスができるようvite.config.tsに追記
 
 ```js
   server: {

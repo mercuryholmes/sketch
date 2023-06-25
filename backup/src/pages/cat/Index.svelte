@@ -1,10 +1,10 @@
-<script lang="ts">
+<script>
 	import { onMount } from 'svelte';
     import AddModal from './AddModal.svelte';
 	import EditModal from './EditModal.svelte';
     import DeleteButton from './DeleteButton.svelte';
 
-    let cats: [Cat];
+    let cats = [];
 
     async function fetchData() {
         await fetch('http://localhost:8080/api/cat', {

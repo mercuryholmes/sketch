@@ -1,17 +1,16 @@
-<script lang="ts">
+<script>
     import { createEventDispatcher } from 'svelte';
     import Modal from '../../lib/Modal.svelte';
 
 	const dispatch = createEventDispatcher();
 	let showModal = false;
 
-	export let id: number;
-	export let name: string;
-	export let breed: string | null;
-	export let description: string | null;
+	export let id;
+	export let name;
+	export let breed;
+	export let description;
 
-	let cat: UpdateCat;
-
+	let cat = {};
 	function initialize() {
 		cat = {
 			"name": name,
@@ -20,7 +19,7 @@
 		}
     };
 
-	const url: string = `http://localhost:8080/api/cat/${id}`;
+	const url = `http://localhost:8080/api/cat/${id}`;
 	async function submit() {
         await fetch(url, {
 			method: 'PUT',

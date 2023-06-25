@@ -4,7 +4,7 @@ WORKDIR /data/repo
 
 COPY package.json ./
 COPY package-lock.json ./
-COPY tsconfig.json ./
+# COPY tsconfig.json ./
 
 RUN npm install
 

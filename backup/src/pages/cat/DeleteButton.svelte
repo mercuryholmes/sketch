@@ -1,12 +1,12 @@
-<script lang="ts">
+<script>
     import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
 
-	export let id: number;
-    export let name: string;
+	export let id;
+    export let name;
 
-	const url: string = `http://localhost:8080/api/cat/${id}`;
+	const url = `http://localhost:8080/api/cat/${id}`;
 	async function submit() {
         const confirm_message = confirm(`delete ${name}?`);
         if (!confirm_message) {

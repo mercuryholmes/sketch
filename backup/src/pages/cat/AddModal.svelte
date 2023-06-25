@@ -1,29 +1,26 @@
-<script lang="ts">
+<script>
     import { createEventDispatcher } from 'svelte';
     import Modal from '../../lib/Modal.svelte';
+	import Message from '../../lib/Message.svelte';
 
 	const dispatch = createEventDispatcher();
 	let showModal = false;
-
-	export let id: number;
-	export let name: string;
-	export let breed: string | null;
-	export let description: string | null;
-
-	let cat: UpdateCat;
+	let message;
+	let cat = {};
 
 	function initialize() {
+		message = '';
 		cat = {
-			"name": name,
-			"breed": breed,
-			"description": description
+			"name": '',
+			"breed": '',
+			"description": ''
 		}
     };
 
-	const url: string = `http://localhost:8080/api/cat/${id}`;
+	const url = `http://localhost:8080/api/cat/`;
 	async function submit() {
         await fetch(url, {
-			method: 'PUT',
+			method: 'POST',
 			headers: {'Content-Type': 'application/json'},
 			body: JSON.stringify({
 				"name": cat.name,
@@ -34,6 +31,7 @@
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
+			message = "Success create cat!";
 			dispatch('fetchData');
         })
         .catch((error) => {
@@ -43,10 +41,13 @@
 </script>
 
 <button on:click={() => (showModal = true, initialize())}>
-    Edit
+    Add
 </button>
 
 <Modal bind:showModal>
+	<div slot="header">
+		<Message bind:message />
+	</div>
 	<form method="POST">
 		<label>
 			Name

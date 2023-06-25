@@ -1,12 +1,12 @@
-<script>
+<script lang="ts">
     import { createEventDispatcher } from 'svelte';
     import Modal from '../../lib/Modal.svelte';
 	import Message from '../../lib/Message.svelte';
 
 	const dispatch = createEventDispatcher();
-	let showModal = false;
-	let message;
-	let cat = {};
+	let showModal: boolean = false;
+	let message: string;
+	let cat: CreateCat;
 
 	function initialize() {
 		message = '';
@@ -17,7 +17,7 @@
 		}
     };
 
-	const url = `http://localhost:8080/api/cat/`;
+	const url: string = `http://localhost:8080/api/cat/`;
 	async function submit() {
         await fetch(url, {
 			method: 'POST',
