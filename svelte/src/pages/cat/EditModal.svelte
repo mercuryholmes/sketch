@@ -10,7 +10,7 @@
 	export let breed: string | null;
 	export let description: string | null;
 
-	let cat: UpdateCat;
+	let cat: UpdateCat = {"name": '', "breed": null, "description": null};
 
 	function initialize() {
 		cat = {

@@ -4,7 +4,7 @@
 	import EditModal from './EditModal.svelte';
     import DeleteButton from './DeleteButton.svelte';
 
-    let cats: [Cat];
+    let cats: Cat[] = [];
 
     async function fetchData() {
         await fetch('http://localhost:8080/api/cat', {
@@ -50,7 +50,7 @@
             <td>{cat.breed ?? ''}</td>
             <td>{cat.description ?? ''}</td>
             <td><EditModal on:fetchData={ fetchData } {...cat}/></td>
-            <td><DeleteButton on:fetchData={ fetchData } {...cat}/></td>
+            <td><DeleteButton on:fetchData={ fetchData } id={cat.id} name={cat.name}/></td>
         </tr>
     {:else}
         <div>Loading...</div>

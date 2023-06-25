@@ -6,14 +6,14 @@
 	const dispatch = createEventDispatcher();
 	let showModal: boolean = false;
 	let message: string;
-	let cat: CreateCat;
+	let cat: CreateCat = {"name": '', "breed": null, "description": null};
 
 	function initialize() {
 		message = '';
 		cat = {
 			"name": '',
-			"breed": '',
-			"description": ''
+			"breed": null,
+			"description": null
 		}
     };
 
